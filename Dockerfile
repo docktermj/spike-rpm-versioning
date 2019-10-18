@@ -34,76 +34,154 @@ ADD ./artifacts/ /artifacts
 
 # Package files as rpm
 
-WORKDIR /output
+WORKDIR /output/rpm
 
 # Make 2.0
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.0 \
+  --name xyzzy-2.0 \
   --version 0 \
-  /artifacts/2.0.0/=/opt/rpmtest/rpmtest-2.0
+  /artifacts/2.0.0/=/opt/xyzzy/xyzzy-2.0
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.0 \
+  --name xyzzy-2.0 \
   --version 1 \
-  /artifacts/2.0.1/=/opt/rpmtest/rpmtest-2.0
+  /artifacts/2.0.1/=/opt/xyzzy/xyzzy-2.0
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.0 \
+  --name xyzzy-2.0 \
   --version 2 \
-  /artifacts/2.0.2/=/opt/rpmtest/rpmtest-2.0
+  /artifacts/2.0.2/=/opt/xyzzy/xyzzy-2.0
 
 # Make 2.1
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.1 \
+  --name xyzzy-2.1 \
   --version 0 \
-  /artifacts/2.1.0/=/opt/rpmtest/rpmtest-2.1
+  /artifacts/2.1.0/=/opt/xyzzy/xyzzy-2.1
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.1 \
+  --name xyzzy-2.1 \
   --version 1 \
-  /artifacts/2.1.1/=/opt/rpmtest/rpmtest-2.1
+  /artifacts/2.1.1/=/opt/xyzzy/xyzzy-2.1
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.1 \
+  --name xyzzy-2.1 \
   --version 2 \
-  /artifacts/2.1.2/=/opt/rpmtest/rpmtest-2.1
+  /artifacts/2.1.2/=/opt/xyzzy/xyzzy-2.1
 
 # Make 2.2
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.2 \
+  --name xyzzy-2.2 \
   --version 0 \
-  /artifacts/2.2.0/=/opt/rpmtest/rpmtest-2.2
+  /artifacts/2.2.0/=/opt/xyzzy/xyzzy-2.2
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.2 \
+  --name xyzzy-2.2 \
   --version 1 \
-  /artifacts/2.2.1/=/opt/rpmtest/rpmtest-2.2
+  /artifacts/2.2.1/=/opt/xyzzy/xyzzy-2.2
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name rpmtest-2.2 \
+  --name xyzzy-2.2 \
   --version 2 \
-  /artifacts/2.2.2/=/opt/rpmtest/rpmtest-2.2
+  /artifacts/2.2.2/=/opt/xyzzy/xyzzy-2.2
+
+
+# APT testing ---------------------------------
+
+# Package files as rpm
+
+WORKDIR /output/deb
+
+# Make 2.0
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.0 \
+  --version 0 \
+  /artifacts/2.0.0/=/opt/xyzzy/xyzzy-2.0
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.0 \
+  --version 1 \
+  /artifacts/2.0.1/=/opt/xyzzy/xyzzy-2.0
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.0 \
+  --version 2 \
+  /artifacts/2.0.2/=/opt/xyzzy/xyzzy-2.0
+
+# Make 2.1
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.1 \
+  --version 0 \
+  /artifacts/2.1.0/=/opt/xyzzy/xyzzy-2.1
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.1 \
+  --version 1 \
+  /artifacts/2.1.1/=/opt/xyzzy/xyzzy-2.1
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.1 \
+  --version 2 \
+  /artifacts/2.1.2/=/opt/xyzzy/xyzzy-2.1
+
+# Make 2.2
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.2 \
+  --version 0 \
+  /artifacts/2.2.0/=/opt/xyzzy/xyzzy-2.2
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.2 \
+  --version 1 \
+  /artifacts/2.2.1/=/opt/xyzzy/xyzzy-2.2
+
+RUN fpm \
+  --input-type dir \
+  --output-type deb \
+  --name xyzzy-2.2 \
+  --version 2 \
+  /artifacts/2.2.2/=/opt/xyzzy/xyzzy-2.2
+
+
 
 # In an active container, run a bash shell
 
