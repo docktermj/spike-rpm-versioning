@@ -1,8 +1,6 @@
 # spike-rpm-versioning
 
-
-
-## Demonstrate using Command Line
+## Demonstrate
 
 ### Clone repository
 
@@ -19,3 +17,179 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
     ```
 
 1. Follow steps in [clone-repository](https://github.com/docktermj/KnowledgeBase/blob/master/HowTo/clone-repository.md) to install the Git repository.
+
+### Build packages
+
+1. xxx
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+    sudo make clean
+    ```
+
+1. xxx
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+    make build
+    ```
+
+### docker formation
+
+1. Identify location of package files.
+
+    ```console
+    export RPM_REPO_DIR=${GIT_REPOSITORY_DIR}/target/rpm
+    export DEB_REPO_DIR=${GIT_REPOSITORY_DIR}/target/deb
+    ```
+
+1. Bring up docker formation.
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+    sudo \
+      RPM_REPO_DIR=${RPM_REPO_DIR} \
+      DEB_REPO_DIR=${DEB_REPO_DIR} \
+      docker-compose up
+    ```
+
+### yum
+
+1. In a new terminal window, shell into the centos image
+
+    ```console
+    docker exec -it spike-centos /bin/bash
+    ```
+
+1. Add the yum repository.
+
+    ```console
+    yum install -y tree
+    yum-config-manager --add-repo=http://spike-yum-repo
+    yum --disablerepo="*" --enablerepo="spike-yum-repo" update
+    yum --disablerepo="*" --enablerepo="spike-yum-repo" list available --showduplicates
+    ```
+
+1. Show that there is nothing in `/opt`.
+
+    ```console
+    $ tree /opt
+    /opt
+
+    0 directories, 0 files
+    ```
+
+1. Install `xyzzy-2.0` at patch level `0`.
+
+    ```console
+    yum install --nogpgcheck -y xyzzy-2.0-0
+    ```
+
+1. Verify installation of `2.0.0.txt`.
+
+    ```console
+    $ tree /opt
+    /opt
+    `-- xyzzy
+        `-- xyzzy-2.0
+            `-- data
+                `-- 2.0.0.txt
+    ```
+
+1. Install `xyzzy-2.1` at patch level `1`.
+
+    ```console
+    yum install --nogpgcheck -y xyzzy-2.1-1
+    ```
+
+1. Verify addition of `xyzzy-2.1` directory.
+
+    ```console
+    $ tree /opt
+    /opt
+    `-- xyzzy
+        |-- xyzzy-2.0
+        |   `-- data
+        |       `-- 2.0.0.txt
+        `-- xyzzy-2.1
+            `-- data
+                `-- 2.1.1.txt
+    ```
+
+1. Install `xyzzy-2.1` at latest level.
+
+    ```console
+    yum install --nogpgcheck -y xyzzy-2.2
+    ```
+
+1. Verify addition of `xyzzy-2.2` directory.
+
+    ```console
+    $ tree /opt
+    /opt
+    `-- xyzzy
+        |-- xyzzy-2.0
+        |   `-- data
+        |       `-- 2.0.0.txt
+        |-- xyzzy-2.1
+        |   `-- data
+        |       `-- 2.1.1.txt
+        `-- xyzzy-2.2
+            `-- data
+                `-- 2.2.2.txt
+    ```
+
+1. Update `xyzzy-2.0` from patch `0` to latest.
+
+    ```console
+    yum install --nogpgcheck -y xyzzy-2.0
+    ```
+
+1. Notice that `2.0.2.txt` exists and `2.0.0.txt` is gone.
+
+    ```console
+    $ tree /opt
+    /opt
+    `-- xyzzy
+        |-- xyzzy-2.0
+        |   `-- data
+        |       `-- 2.0.2.txt
+        |-- xyzzy-2.1
+        |   `-- data
+        |       `-- 2.1.1.txt
+        `-- xyzzy-2.2
+            `-- data
+                `-- 2.2.2.txt
+    ```
+
+### apt
+
+1. xxx
+
+    ```console
+    tree /opt
+    ```
+
+1. xxx
+
+    ```console
+    $ tree /opt
+    ```
+
+1. xxx
+
+    ```console
+    $ tree /opt
+    ```
+
+1. xxx
+
+    ```console
+    $ tree /opt
+    ```
+
+1. xxx
+
+    ```console
+    $ tree /opt
+    ```
