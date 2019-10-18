@@ -24,10 +24,6 @@ RUN yum -y install \
 
 RUN gem install --no-ri --no-rdoc fpm
 
-# Copy files from repository.
-
-COPY ./rootfs /
-
 # Import files.
 
 ADD ./artifacts/ /artifacts
