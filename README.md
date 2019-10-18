@@ -298,3 +298,13 @@ but using `apt-get`.
 
     7 directories, 3 files
     ```
+
+### Cleanup
+
+1. Bring down docker formation.
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+    sudo \
+      docker-compose down
+    ```
