@@ -305,6 +305,12 @@ but using `apt-get`.
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
-    sudo \
-      docker-compose down
+    sudo docker-compose down
+    ```
+
+1. Clean repository.
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+    sudo make clean
     ```
