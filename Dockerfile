@@ -32,6 +32,8 @@ COPY ./rootfs /
 
 ADD ./artifacts/ /artifacts
 
+# ---- YUM testing ---------------------------------
+
 # Package files as rpm
 
 WORKDIR /output/rpm
@@ -105,10 +107,9 @@ RUN fpm \
   --version 2 \
   /artifacts/2.2.2/=/opt/xyzzy/xyzzy-2.2
 
+# ---- APT testing ---------------------------------
 
-# APT testing ---------------------------------
-
-# Package files as rpm
+# Package files as deb
 
 WORKDIR /output/deb
 
@@ -180,8 +181,6 @@ RUN fpm \
   --name xyzzy-2.2 \
   --version 2 \
   /artifacts/2.2.2/=/opt/xyzzy/xyzzy-2.2
-
-
 
 # In an active container, run a bash shell
 
