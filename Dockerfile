@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=centos:7
 FROM ${BASE_IMAGE}
 
-ENV REFRESHED_AT=2019-10-17
+ENV REFRESHED_AT=2019-10-16
 
 LABEL Name="docktermj/rpm-versioning" \
       Version="1.0.0"
@@ -24,30 +24,86 @@ RUN yum -y install \
 
 RUN gem install --no-ri --no-rdoc fpm
 
+# Copy files from repository.
+
+COPY ./rootfs /
+
 # Import files.
 
 ADD ./artifacts/ /artifacts
 
 # Package files as rpm
 
-ENV REFRESHED_AT_2=2019-10-17-1
-
-VOLUME /output
 WORKDIR /output
 
-RUN fpm \
-  --input-type dir \
-  --output-type rpm \
-  --name senzingapi \
-  --version 9.0.0 \
-  /artifacts=/opt/mjd/g2-9.0.0
+# Make 2.0
 
 RUN fpm \
   --input-type dir \
   --output-type rpm \
-  --name senzingapi \
-  --version 9.1.0 \
-  /artifacts=/opt/mjd/g2-9.1.0
+  --name rpmtest-2.0 \
+  --version 0 \
+  /artifacts/2.0.0/=/opt/rpmtest/rpmtest-2.0
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.0 \
+  --version 1 \
+  /artifacts/2.0.1/=/opt/rpmtest/rpmtest-2.0
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.0 \
+  --version 2 \
+  /artifacts/2.0.2/=/opt/rpmtest/rpmtest-2.0
+
+# Make 2.1
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.1 \
+  --version 0 \
+  /artifacts/2.1.0/=/opt/rpmtest/rpmtest-2.1
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.1 \
+  --version 1 \
+  /artifacts/2.1.1/=/opt/rpmtest/rpmtest-2.1
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.1 \
+  --version 2 \
+  /artifacts/2.1.2/=/opt/rpmtest/rpmtest-2.1
+
+# Make 2.2
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.2 \
+  --version 0 \
+  /artifacts/2.2.0/=/opt/rpmtest/rpmtest-2.2
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.2 \
+  --version 1 \
+  /artifacts/2.2.1/=/opt/rpmtest/rpmtest-2.2
+
+RUN fpm \
+  --input-type dir \
+  --output-type rpm \
+  --name rpmtest-2.2 \
+  --version 2 \
+  /artifacts/2.2.2/=/opt/rpmtest/rpmtest-2.2
 
 # In an active container, run a bash shell
 

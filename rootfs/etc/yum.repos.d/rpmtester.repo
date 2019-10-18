@@ -1,0 +1,6 @@
+[senzing-production]
+name=Senzing Production Packages  - $basearch
+baseurl=https://senzing-production-yum.s3.amazonaws.com/$basearch/
+enabled=1
+gpgkey=https://senzing-production-yum.s3.amazonaws.com/senzing-production.key
+gpgcheck=1

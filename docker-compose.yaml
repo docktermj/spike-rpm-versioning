@@ -1,0 +1,26 @@
+version: '3'
+services:
+
+  yumrepo:
+    container_name: spike-yumrepo
+    image: dgutierrez1287/yum-repo
+    networks:
+      - backend
+    ports:
+      - 8081:80
+    volumes:
+      - ${REPO_DIR:-/tmp/spike/yum-repo}:/repo
+
+  centos7:
+    container_name: spike-centos
+    command:
+      - sleep
+      - infinity
+    image: centos:7
+    networks:
+      - backend
+
+
+
+networks:
+  backend:
