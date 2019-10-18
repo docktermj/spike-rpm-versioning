@@ -111,7 +111,8 @@ RUN fpm \
   --depends xyzzy-2.1-0 \
   --name xyzzy \
   --output-type rpm \
-  --version 1
+  --version 2.1.0 \
+  /artifacts/none/=/opt/xyzzy
 
 RUN fpm \
   --input-type dir \
@@ -119,7 +120,9 @@ RUN fpm \
   --depends xyzzy-2.2-2 \
   --name xyzzy \
   --output-type rpm \
-  --version 2
+  --version 2.2.0 \
+  /artifacts/none/=/opt/xyzzy
+
 
 # ---- APT testing ---------------------------------
 
@@ -204,7 +207,8 @@ RUN fpm \
   --depends xyzzy-2.1-0 \
   --name xyzzy \
   --output-type deb \
-  --version 1
+  --version 2.1.0 \
+  /artifacts/none/=/opt/xyzzy
 
 RUN fpm \
   --input-type dir \
@@ -212,7 +216,9 @@ RUN fpm \
   --depends xyzzy-2.2-2 \
   --name xyzzy \
   --output-type deb \
-  --version 2
+  --version 2.2.0 \
+  /artifacts/none/=/opt/xyzzy
+
 
 # In an active container, run a bash shell
 

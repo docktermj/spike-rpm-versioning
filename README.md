@@ -308,3 +308,66 @@ but using `apt-get`.
     cd ${GIT_REPOSITORY_DIR}
     sudo make clean
     ```
+
+## Demonstrate parent
+
+1. Bring up new docker formation.
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+    sudo \
+      RPM_REPO_DIR=${RPM_REPO_DIR} \
+      DEB_REPO_DIR=${DEB_REPO_DIR} \
+      docker-compose up
+    ```
+
+### yum parent
+
+**Note:** This is the same demonstration as [apt](#apt)
+but using `yum`.
+
+1. In a new terminal window, shell into the centos image
+
+    ```console
+    sudo docker exec -it spike-centos /bin/bash
+    ```
+
+1. Add system packages.
+
+    ```console
+    yum install -y tree
+    ```
+
+1. Add the yum repository.
+
+    ```console
+    yum-config-manager --add-repo=http://spike-yum-repo
+    yum --disablerepo="*" --enablerepo="spike-yum-repo" update
+    yum --disablerepo="*" --enablerepo="spike-yum-repo" list available --showduplicates
+    ```
+
+1. Show that there is nothing in `/opt`.
+
+    ```console
+    $ tree /opt
+    /opt
+
+    0 directories, 0 files
+    ```
+
+1. Install `xyzzy-2.0` at patch level `0`.
+
+    ```console
+    yum install --nogpgcheck -y xyzzy-2.1.0
+    ```
+
+1. Show that there is nothing in `/opt`.
+
+    ```console
+    $ tree /opt
+    /opt
+
+    0 directories, 0 files
+    ```
+
+
