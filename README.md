@@ -20,14 +20,8 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
 
 ### Build packages
 
-1. xxx
 
-    ```console
-    cd ${GIT_REPOSITORY_DIR}
-    sudo make clean
-    ```
-
-1. xxx
+1. Build packages via docker container.
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
