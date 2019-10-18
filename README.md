@@ -55,16 +55,24 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
 
 ### yum
 
+**Note:** This is the same demonstration as [apt](#apt)
+but using `yum`.
+
 1. In a new terminal window, shell into the centos image
 
     ```console
-    docker exec -it spike-centos /bin/bash
+    sudo docker exec -it spike-centos /bin/bash
+    ```
+
+1. Add system packages.
+
+    ```console
+    yum install -y tree
     ```
 
 1. Add the yum repository.
 
     ```console
-    yum install -y tree
     yum-config-manager --add-repo=http://spike-yum-repo
     yum --disablerepo="*" --enablerepo="spike-yum-repo" update
     yum --disablerepo="*" --enablerepo="spike-yum-repo" list available --showduplicates
@@ -94,6 +102,8 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
         `-- xyzzy-2.0
             `-- data
                 `-- 2.0.0.txt
+
+    3 directories, 1 file
     ```
 
 1. Install `xyzzy-2.1` at patch level `1`.
@@ -114,6 +124,8 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
         `-- xyzzy-2.1
             `-- data
                 `-- 2.1.1.txt
+
+    5 directories, 2 files
     ```
 
 1. Install `xyzzy-2.1` at latest level.
@@ -164,32 +176,125 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
 
 ### apt
 
-1. xxx
+**Note:** This is the same demonstration as [yum](#yum)
+but using `apt-get`.
+
+1. In a new terminal window, shell into the debian image.
 
     ```console
-    tree /opt
+    sudo docker exec -it spike-debian /bin/bash
     ```
 
-1. xxx
+1. Add system packages.
+
+    ```console
+    apt-get update
+    apt-get install -y software-properties-common tree
+    ```
+
+1. Add the apt repository.
+
+    ```console
+    add-apt-repository 'deb http://spike-apt-repo trusty main'
+    apt-get update --allow-unauthenticated
+    ```
+
+1. Show that there is nothing in `/opt`.
 
     ```console
     $ tree /opt
+    /opt
+
+    0 directories, 0 files
     ```
 
-1. xxx
+1. Install `xyzzy-2.0` at patch level `0`.
+
+    ```console
+    apt-get install --allow-unauthenticated -y xyzzy-2.0=0
+    ```
+
+1. Verify installation of `2.0.0.txt`.
 
     ```console
     $ tree /opt
+    /opt
+    `-- xyzzy
+        `-- xyzzy-2.0
+            `-- data
+                `-- 2.0.0.txt
+
+    3 directories, 1 file
     ```
 
-1. xxx
+1. Install `xyzzy-2.1` at patch level `1`.
+
+    ```console
+    apt-get install --allow-unauthenticated -y xyzzy-2.1=1
+    ```
+
+1. Verify addition of `xyzzy-2.1` directory.
 
     ```console
     $ tree /opt
+    /opt
+    `-- xyzzy
+        |-- xyzzy-2.0
+        |   `-- data
+        |       `-- 2.0.0.txt
+        `-- xyzzy-2.1
+            `-- data
+                `-- 2.1.1.txt
+
+    5 directories, 2 files
     ```
 
-1. xxx
+1. Install `xyzzy-2.1` at latest level.
+
+    ```console
+    apt-get install --allow-unauthenticated -y xyzzy-2.2
+    ```
+
+1. Verify addition of `xyzzy-2.2` directory.
 
     ```console
     $ tree /opt
+    /opt
+    `-- xyzzy
+        |-- xyzzy-2.0
+        |   `-- data
+        |       `-- 2.0.0.txt
+        |-- xyzzy-2.1
+        |   `-- data
+        |       `-- 2.1.1.txt
+        `-- xyzzy-2.2
+            `-- data
+                `-- 2.2.2.txt
+
+    7 directories, 3 files
+    ```
+
+1. Update `xyzzy-2.0` from patch `0` to latest.
+
+    ```console
+    apt-get install --allow-unauthenticated -y xyzzy-2.0
+    ```
+
+1. Notice that `2.0.2.txt` exists and `2.0.0.txt` is gone.
+
+    ```console
+    $ tree /opt
+    /opt
+    `-- xyzzy
+        |-- xyzzy-2.0
+        |   `-- data
+        |       `-- 2.0.2.txt
+        |-- xyzzy-2.1
+        |   `-- data
+        |       `-- 2.1.1.txt
+        `-- xyzzy-2.2
+            `-- data
+                `-- 2.2.2.txt
+
+    7 directories, 3 files
     ```
